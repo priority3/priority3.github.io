@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>算法排序_快速排序 | hexo-夏橘小站</title><meta name="keywords" content="c语言"><meta name="author" content="夏橘"><meta name="copyright" content="夏橘"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="快速排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法排序_快速排序">
+<meta property="og:url" content="http://example.com/2021/01/23/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="hexo-夏橘小站">
+<meta property="og:description" content="快速排序">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-01-23T15:28:30.000Z">
+<meta property="article:modified_time" content="2021-01-23T16:36:23.374Z">
+<meta property="article:author" content="夏橘">
+<meta property="article:tag" content="c语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/01/23/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-24 00:36:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">hexo-夏橘小站</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">算法排序_快速排序</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-23T15:28:30.000Z" title="发表于 2021-01-23 23:28:30">2021-01-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-23T16:36:23.374Z" title="更新于 2021-01-24 00:36:23">2021-01-24</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="算法排序_快速排序"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><a id="more"></a>
+
+
+
+<h4 id="基本简介"><a href="#基本简介" class="headerlink" title="基本简介"></a>基本简介</h4><p>快速排序（Quicksort）是对<a target="_blank" rel="noopener" href="https://baike.so.com/doc/2392104-2529369.html">冒泡排序</a>的一种改进。由C. A. R. Hoare在1962年提出。</p>
+<p>它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
+<h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><p>设要排序的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E7%BB%84">数组</a>是A[0]……A[N-1]，首先任意选取一个数据（通常选用数组的第一个数）作为关键数据，然后将所有比它小的数都放到它左边，所有比它大的数都放到它右边，这个过程称为一趟快速排序。值得注意的是，快速排序不是一种稳定的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">排序算法</a>，也就是说，多个相同的值的相对位置也许会在算法结束时产生变动。 </p>
+<p>一趟快速排序的算法是： </p>
+<p>1）设置两个变量i、j，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F">排序</a>开始的时候：i=0，j=N-1； </p>
+<p>2）以第一个数组元素作为关键数据，赋值给<strong>key</strong>，即<strong>key</strong>=A[0]； </p>
+<p>3）从j开始向前搜索，即由后开始向前搜索(j–)，找到第一个小于<strong>key</strong>的值A[j]，将A[j]和A[i]的值交换； </p>
+<p>4）从i开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于<strong>key</strong>的A[i]，将A[i]和A[j]的值交换； </p>
+<p>5）重复第3、4步，直到i==j； (3,4步中，没找到符合条件的值，即3中A[j]不小于<strong>key</strong>,4中A[i]不大于<strong>key</strong>的时候改变j、i的值，使得j=j-1，i=i+1，直至找到为止。找到符合条件的值，进行交换的时候i， j指针位置不变。另外，i==j这一过程一定正好是i+或j-完成的时候，此时令循环结束）。 </p>
+<h3 id="排序演示"><a href="#排序演示" class="headerlink" title="排序演示"></a>排序演示</h3><p>假设一开始序列{xi}是：5，3，7，6，4，1，0，2，9，10，8。</p>
+<p>此时，ref=5，i=1，j=11，从后往前找，第一个比5小的数是x8=2，因此序列为：2，3，7，6，4，1，0，5，9，10，8。</p>
+<p>此时i=1，j=8，从前往后找，第一个比5大的数是x3=7，因此序列为：2，3，5，6，4，1，0，7，9，10，8。</p>
+<p>此时，i=3，j=8，从第8位往前找，第一个比5小的数是x7=0，因此：2，3，0，6，4，1，5，7，9，10，8。</p>
+<p>此时，i=3，j=7，从第3位往后找，第一个比5大的数是x4=6，因此：2，3，0，5，4，1，6，7，9，10，8。</p>
+<p>此时，i=4，j=7，从第7位往前找，第一个比5小的数是x6=1，因此：2，3，0，1，4，5，6，7，9，10，8。</p>
+<p>此时，i=4，j=6，从第4位往后找，直到第6位才有比5大的数，这时，i=j=6，ref成为一条分界线，它之前的数都比它小，之后的数都比它大，对于前后两部分数，可以采用同样的方法来排序。</p>
+<h5 id="动图演示"><a href="#动图演示" class="headerlink" title="动图演示"></a>动图演示</h5><p><img src="https://bkimg.cdn.bcebos.com/pic/b7003af33a87e950707fdf2110385343fbf2b416?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U3Mg==,g_7,xp_5,yp_5"></p>
+<p><strong>说明</strong> ：原理演示均来自百度百科。</p>
+<p>那么基于c语言实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span> <span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>;</span><br><span class="line"><span class="comment">//  定义一个函数来对一个数进行归位</span></span><br><span class="line"><span class="comment">/* 我定义归位的意思就是 把一个数放到中间某个位置，他的左边都是比他小的数，他的右边都是比他大的数；</span></span><br><span class="line"><span class="comment">然后对左右两边进行递归归位.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">5</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> right=<span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(a[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;right;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="comment">// 这里做遍历为了调试时便于比较</span></span><br><span class="line">    quick_sort(a,<span class="number">0</span>,right<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;right;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span> <span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = right;</span><br><span class="line">    <span class="keyword">int</span> temp = a[left];  <span class="comment">// 用temp来暂时储存要归位的那个数</span></span><br><span class="line">    <span class="keyword">while</span> (left&lt;right)&#123;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; a[right]&gt;= temp)&#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        a[left] = a[right];</span><br><span class="line">        <span class="comment">//  从右边找一个小于归位的那个数的值放入最开始归位那个数的位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;=len;i++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="comment">// 对每次右边找数做一次输出</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; a[left]&lt;= temp)&#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        a[right] = a[left];</span><br><span class="line">        <span class="comment">//  从左边找一个大于归位那个数的值放入右边空出来的位置</span></span><br><span class="line">        <span class="comment">//（这个位置是上面找的那个小于归位那个数的位置）</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;=len;i++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		<span class="comment">// 对每次左边找数做一次输出</span></span><br><span class="line">    &#125;</span><br><span class="line">    a[left] = temp;  <span class="comment">// 最后把归位那个数放在 left或者right的位置</span></span><br><span class="line">    <span class="keyword">return</span> left; <span class="comment">// 这里返回left，right都可 以为循环结束时left等于right</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span> <span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &lt; right )&#123;  <span class="comment">// 满足数组至少两位</span></span><br><span class="line">        <span class="keyword">int</span> mid = partition(a,left,right); <span class="comment">/* 定义的mid 但它不一定就是在正中间的位置，</span></span><br><span class="line"><span class="comment">        而是中间的某个位置 */</span></span><br><span class="line">        quick_sort(a,left,mid<span class="number">-1</span>);<span class="comment">//对归位那个数的左边进行递归</span></span><br><span class="line">        quick_sort(a,mid+<span class="number">1</span>,right); <span class="comment">// 对归位那个数的右边进行递归</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h5 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h5><blockquote>
+<p>5 8 6 4 3 9 2 7 1<br>1 8 6 4 3 9 2 7 1<br>1 8 6 4 3 9 2 7 8<br>1 2 6 4 3 9 2 7 8<br>1 2 6 4 3 9 6 7 8<br>1 2 3 4 3 9 6 7 8<br>1 2 3 4 3 9 6 7 8<br>1 2 3 4<br>1 2 3 4<br>1 2 3 4<br>1 2 3 4<br>1 2 3 4<br>1 2 3 4<br>1 2 3 4 5 8 6 7 8<br>1 2 3 4 5 8 6 7 8<br>1 2 3 4 5 7 6 7<br>1 2 3 4 5 7 6 7<br>1 2 3 4 5 6 6<br>1 2 3 4 5 6 6<br>1 2 3 4 5 6 7 8 9</p>
+</blockquote>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>时间复杂度： </p>
+<p><img src="https://p1.ssl.qhimg.com/t014026d06e5f21dfba.jpg"></p>
+<p>我们发现第一次归位，是将整个数组分成了两份，然后再分别对右边和左边的数重复这个操作；那么他不断分成两份的这个过程便是logn；意思就是第一次需要进行一次归位操作；第二次需要进行两次归位操作;第三次需要进行4次归位，第四次需要进行8次归位……依次下来就是logn次归位（第一次和第二次以及之后的每一次归位操作的时间复杂度都是一次归位的时间复杂度，我们记一次归位的时间复杂度为O（x），那么2O（x）和8O（x）本质一样），所以我们只需要分析归位操作的时间复杂度即可.</p>
+<hr>
+<p>上述代码我们用<strong>partition</strong>表示归位操作；那么函数里面我们做的本质就是在一个while循环里从右边找一个填到左边，从左边找一个数填到右边，其实就是想到与一次一次比较然后换位的过程，所以时间复杂度应当就是O（n）。那么<strong>quick_sort</strong>的时间复杂度为O（nlogn）。</p>
+<h4 id="快速排序的最坏情况"><a href="#快速排序的最坏情况" class="headerlink" title="快速排序的最坏情况"></a>快速排序的最坏情况</h4><p>当我们的一个数组为[9,8,7,6,5,4,3,2,1]时，那么对照算法他每次的归位的结果会是</p>
+<blockquote>
+<p>1，8，7，6，5，4，3，2，9  </p>
+<p>1，8，7，6，5，4，3，2  再归位（此时9已经排好，在对9左右两边进行归位），</p>
+<p>因为1右边的数都比他大所以又被写回来了</p>
+<p>8，7，6，5，4，3，2 那么又回到最开始的情况</p>
+<p>2，7，6，5，4，3</p>
+<p>7，6，5，4，3</p>
+<p>……….</p>
+</blockquote>
+<p>所以一共时需要进行n次归位，那么此时最坏条件下的时间复杂度即为n².</p>
+<p>其实我们要尽可能避免这种情况很简单，我们归位的那个数不是必须要从第0位开始，可以是随机数组中的任何一个位置，我们只需要把要归位的那个数与第0位的这个数调换位置，在执行<strong>quick_sort</strong>即可。</p>
+<p>其实刁钻来讲，仍然存在一中最坏的条件，那就是我们每次随机的那个数刚好就是数组中的最大值，那么他的时间复杂度仍然还是O（n²），但这种几率小的可以忽略了。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">夏橘</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/01/23/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">http://example.com/2021/01/23/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">hexo-夏橘小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/c%E8%AF%AD%E8%A8%80/">c语言</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/01/25/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F-%E5%A0%86%E6%8E%92%E5%BA%8F/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">算法排序_堆排序</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/21/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法排序_插入排序</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/01/21/查找-二分法/" title="查找_二分法"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-21</div><div class="title">查找_二分法</div></div></a></div><div><a href="/2021/02/06/栈应用-括号匹配问题/" title="栈应用_括号匹配问题"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-06</div><div class="title">栈应用_括号匹配问题</div></div></a></div><div><a href="/2021/01/19/汉诺塔问题/" title="汉诺塔问题"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-19</div><div class="title">汉诺塔问题</div></div></a></div><div><a href="/2021/01/27/算法排序-希尔排序/" title="算法排序_希尔排序"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-27</div><div class="title">算法排序_希尔排序</div></div></a></div><div><a href="/2021/01/27/算法排序-归并排序/" title="算法排序_归并排序"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-27</div><div class="title">算法排序_归并排序</div></div></a></div><div><a href="/2021/01/25/算法排序-堆排序/" title="算法排序_堆排序"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-25</div><div class="title">算法排序_堆排序</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">夏橘</div><div class="author-info__description">个人站</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%AE%80%E4%BB%8B"><span class="toc-number">1.0.1.</span> <span class="toc-text">基本简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.0.2.</span> <span class="toc-text">算法描述</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E6%BC%94%E7%A4%BA"><span class="toc-number">1.1.</span> <span class="toc-text">排序演示</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">动图演示</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">输出结果</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-number">1.1.1.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%9A%84%E6%9C%80%E5%9D%8F%E6%83%85%E5%86%B5"><span class="toc-number">1.1.2.</span> <span class="toc-text">快速排序的最坏情况</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/03/22/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="深拷贝与浅拷贝"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深拷贝与浅拷贝"/></a><div class="content"><a class="title" href="/2021/03/22/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="深拷贝与浅拷贝">深拷贝与浅拷贝</a><time datetime="2021-03-22T07:34:43.000Z" title="发表于 2021-03-22 15:34:43">2021-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/08/%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="通讯录管理系统"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通讯录管理系统"/></a><div class="content"><a class="title" href="/2021/03/08/%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="通讯录管理系统">通讯录管理系统</a><time datetime="2021-03-08T09:21:32.000Z" title="发表于 2021-03-08 17:21:32">2021-03-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/28/%E9%93%BE%E8%A1%A8/" title="链表"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="链表"/></a><div class="content"><a class="title" href="/2021/02/28/%E9%93%BE%E8%A1%A8/" title="链表">链表</a><time datetime="2021-02-27T16:09:25.000Z" title="发表于 2021-02-28 00:09:25">2021-02-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/20/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95/" title="牛顿迭代法"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="牛顿迭代法"/></a><div class="content"><a class="title" href="/2021/02/20/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95/" title="牛顿迭代法">牛顿迭代法</a><time datetime="2021-02-20T13:51:11.000Z" title="发表于 2021-02-20 21:51:11">2021-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/06/%E6%A0%88%E5%BA%94%E7%94%A8-%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/" title="栈应用_括号匹配问题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="栈应用_括号匹配问题"/></a><div class="content"><a class="title" href="/2021/02/06/%E6%A0%88%E5%BA%94%E7%94%A8-%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/" title="栈应用_括号匹配问题">栈应用_括号匹配问题</a><time datetime="2021-02-06T08:49:27.000Z" title="发表于 2021-02-06 16:49:27">2021-02-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 夏橘</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
